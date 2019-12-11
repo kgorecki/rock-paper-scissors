@@ -1,5 +1,8 @@
 package com.bintohimo.rockpaperscissorslizardspock;
 
+/**
+ * Class holding result of the game and opponent's choice
+ */
 public class GameResult {
 
     public enum GameResultType {

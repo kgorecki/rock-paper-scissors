@@ -2,27 +2,15 @@ package com.bintohimo.rockpaperscissorslizardspock;
 
 import java.util.*;
 
-
+/**
+ * Game class handles game logic
+ */
 public class Game {
 
-    public enum GameType {
-        RockPaperScissors(0),
-        RockPaperScissorsLizardSpock(1);
-
-        private final int value;
-        GameType(int value) {
-            this.value = value;
-        }
-
-        public int getValue() {
-            return value;
-        }
-    }
-
-    String choice;
-    List<String> choices;
-    Map<String, List<String>> beats;
-    GameType gameType;
+    private String choice;                      // stores user's choice
+    private List<String> choices;               // stores available choices
+    private Map<String, List<String>> beats;    // stores information which choice beats which choices
+    private GameType gameType;                  // Rock-Paper-Scissors or Rock-Paper-Scissors-Lizard-Spock?
 
     public Game(String choice, GameType gameType) {
         choices = new ArrayList<String>(Arrays.asList("Rock", "Paper", "Scissors"));
@@ -43,13 +31,10 @@ public class Game {
         this.gameType = gameType;
     }
 
-    private void checkValidity() {
-        if (choices.contains(choice))
-            return;
-
-        throw new IllegalArgumentException(choice + " is not valid argument! Possible choices: " + choices.toString());
-    }
-
+    /**
+     * Main entry point for the game
+     * @return result of the game and opponent's choice
+     */
     public GameResult getResult() {
         checkValidity();
 
@@ -65,4 +50,15 @@ public class Game {
 
         return new GameResult(GameResult.GameResultType.Lose, opponent);
     }
+
+    /**
+     * Checks if user entered valid choice
+     */
+    private void checkValidity() {
+        if (choices.contains(choice))
+            return;
+
+        throw new IllegalArgumentException(choice + " is not valid argument! Possible choices: " + choices.toString());
+    }
+
 }

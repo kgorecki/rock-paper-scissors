@@ -2,6 +2,7 @@ package com.bintohimo.rockpaperscissorslizardspock.controllers;
 
 import com.bintohimo.rockpaperscissorslizardspock.Game;
 import com.bintohimo.rockpaperscissorslizardspock.GameResult;
+import com.bintohimo.rockpaperscissorslizardspock.GameType;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ public class GameController {
     public @ResponseBody
     ResponseEntity RockPaperScissors(@RequestParam(value="choice") String choice) {
         choice = StringUtils.capitalize(choice.toLowerCase());
-        Game game = new Game(choice, Game.GameType.RockPaperScissors);
+        Game game = new Game(choice, GameType.RockPaperScissors);
         return generateResult(game, choice);
     }
 
@@ -24,10 +25,16 @@ public class GameController {
     public @ResponseBody
     ResponseEntity RockPaperScissorsLizardSpock(@RequestParam(value="choice") String choice) {
         choice = StringUtils.capitalize(choice.toLowerCase());
-        Game game = new Game(choice, Game.GameType.RockPaperScissorsLizardSpock);
+        Game game = new Game(choice, GameType.RockPaperScissorsLizardSpock);
         return generateResult(game, choice);
     }
 
+    /**
+     * Generated nice response
+     * @param game reference to the game instance
+     * @param choice user's choice
+     * @return
+     */
     private ResponseEntity generateResult(Game game, String choice) {
         GameResult gameResult;
         try {
